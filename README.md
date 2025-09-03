@@ -6,6 +6,11 @@ Uses PyTesseract, pyUPDF
 
 
 ```bash
+git clone https://github.com/drguptavivek/fundus_image_manager_base.git
+cd fundus_image_manager_base
+python3 
+
+
 git clone https://github.com/drguptavivek/fundus_img_xtract.git
 uv init
 uv sync

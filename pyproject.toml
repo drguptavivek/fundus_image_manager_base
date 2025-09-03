@@ -1,0 +1,23 @@
+[project]
+name = "fundus-image-manager-base"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "argon2-cffi>=25.1.0",
+    "flask>=3.1.2",
+    "flask-login>=0.6.3",
+    "flask-wtf>=1.2.2",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.2",
+    "pandas>=2.3.2",
+    "pillow>=11.3.0",
+    "pymupdf>=1.26.4",
+    "pytesseract>=0.3.13",
+    "pytest>=8.4.1",
+    "python-dotenv>=1.1.1",
+    "python-magic>=0.4.27",
+    "sqlalchemy>=2.0.43",
+    "werkzeug>=3.1.3",
+]
