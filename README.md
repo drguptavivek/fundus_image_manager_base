@@ -8,12 +8,16 @@ Uses PyTesseract, pyUPDF
 ```bash
 git clone https://github.com/drguptavivek/fundus_image_manager_base.git
 cd fundus_image_manager_base
-python3 
+python3 setup_env_and_npm.py 
 
+python -m scripts.create_user
+python -m scripts.assign_roles admin    --roles admin
+python -m scripts.assign_roles admin    --roles admin data_manager
+python -m scripts.assign_roles admin    --roles fileUploader
 
-git clone https://github.com/drguptavivek/fundus_img_xtract.git
 uv init
-uv sync
+uv add -r requirements.txt 
+
 
 ```
 
