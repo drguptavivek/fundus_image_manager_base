@@ -1,0 +1,805 @@
+/* static/css/app.css     */
+/* Custom app styles (viewer, pages). Theme and components are built via Sass. */
+
+/* Navbar and background theming now compiled via SCSS (bootstrap-theme.scss). */
+
+
+/* ================================
+   PDF inside PhotoSwipe
+   ================================ */
+.pswp__pdfwrap {
+  position: absolute;
+  /* allow top/left/right/bottom */
+  top: 6rem;
+  /* push PDF below toolbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.pswp__pdfwrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: none !important;
+  /* PDFs should never be filtered */
+}
+
+
+
+/* ================================
+   Captions
+   ================================ */
+.pswp__custom-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: .25rem .5rem;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 9000;
+  /* below top bar, above slide */
+  pointer-events: none;
+  /* never block pan/zoom */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* ================================
+   Image filters (SVG filters mapped)
+   ================================ */
+.pswp-img-filter-greenmono {
+  filter: url(#pswp-greenmono);
+}
+
+.pswp-img-filter-greenboost {
+  filter: url(#pswp-greenboost);
+}
+
+.pswp-img-filter-gray {
+  filter: url(#pswp-gray);
+}
+
+.pswp-img-filter-contrast {
+  filter: url(#pswp-contrast);
+}
+
+.pswp-img-filter-bluemono {
+  filter: url(#pswp-bluemono);
+}
+
+/* ================================
+   Layout tweaks
+   ================================ */
+/* Push images down by 20px to avoid overlapping UI */
+.pswp__img {
+  margin-top: 20px;
+  box-sizing: border-box;
+
+}
+
+/* PDF wrapper still below toolbar */
+.pswp__pdfwrap {
+  position: absolute;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.pswp__pdfwrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: none !important;
+}
+
+
+
+
+/* ================================
+   Top bar & UI controls
+   ================================ */
+
+/* Custom filter buttons */
+.pswp__button--filter-redfree,
+.pswp__button--filter-greenboost,
+.pswp__button--filter-bluemono,
+.pswp__button--filter-gray,
+.pswp__button--filter-contrast,
+.pswp__button--filter-clear {
+  width: auto;
+  min-width: 28px;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #fff;
+  background: rgba(20, 126, 6, 0.45);
+  border: none;
+  border-radius: 3px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.pswp__button.active {
+  background-color: #157347 !important;
+}
+
+
+
+
+/* ================================
+   Site footer
+   ================================ */
+.site-footer {
+  background: var(--bs-body-bg);
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.site-footer .link-body-emphasis:hover {
+  text-decoration: underline;
+}
+
+.site-footer [data-theme-toggle] {
+  line-height: 1.1;
+}
+
+
+/* ===== Zoom slider base ===== */
+.pswp__zoom-slider {
+  /* make it styleable across browsers */
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  z-index: 10003;
+  width: 160px;
+  margin-left: 8px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  /* allow drags/taps; no double-tap zoom */
+  outline: none;
+  --pswp-zoom-track: rgba(255, 255, 255, .28);
+  /* unfilled */
+  --pswp-zoom-fill: rgba(255, 255, 255, .9);
+  /* filled */
+  --pswp-zoom-thumb: #ffffff;
+  /* knob */
+  --pswp-zoom-thumb-border: rgba(0, 0, 0, .45);
+  --pswp-zoom-track-h: 4px;
+  /* track height */
+}
+
+/* Light theme: darken track and filled portion for visibility */
+[data-bs-theme="light"] .pswp__zoom-slider {
+  --pswp-zoom-track: rgba(0, 0, 0, .2);
+  --pswp-zoom-fill: rgba(0, 0, 0, .7);
+}
+
+/* Focus ring for accessibility */
+.pswp__zoom-slider:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, .85);
+  outline-offset: 2px;
+}
+
+/* ===== WebKit (Chrome, Safari) ===== */
+/* Track: use a gradient to fake the "filled" portion (we'll set its size via JS) */
+.pswp__zoom-slider::-webkit-slider-runnable-track {
+  height: var(--pswp-zoom-track-h);
+  border-radius: 999px;
+  background:
+    linear-gradient(to right, var(--pswp-zoom-fill), var(--pswp-zoom-fill)) 0/var(--bg-size, 0%) 100% no-repeat,
+    var(--pswp-zoom-track);
+}
+
+/* Thumb */
+.pswp__zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--pswp-zoom-thumb);
+  border: 1px solid var(--pswp-zoom-thumb-border);
+  margin-top: calc((var(--pswp-zoom-track-h) - 14px) / 2);
+  /* vertically center */
+}
+
+/* ===== Firefox ===== */
+/* Unfilled track */
+.pswp__zoom-slider::-moz-range-track {
+  height: var(--pswp-zoom-track-h);
+  border-radius: 999px;
+  background: var(--pswp-zoom-track);
+}
+
+/* Filled portion (from min to current value) */
+.pswp__zoom-slider::-moz-range-progress {
+  height: var(--pswp-zoom-track-h);
+  border-radius: 999px;
+  background: var(--pswp-zoom-fill);
+}
+
+/* Thumb */
+.pswp__zoom-slider::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--pswp-zoom-thumb);
+  border: 1px solid var(--pswp-zoom-thumb-border);
+}
+
+/* High-contrast mode friendliness */
+@media (forced-colors: active) {
+  .pswp__zoom-slider {
+    forced-color-adjust: auto;
+  }
+}
+
+
+/* Ensure the top bar is on top and clickable (keep these if not already present) */
+.pswp__top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10002 !important;
+  pointer-events: auto !important;
+}
+
+.pswp__top-bar * {
+  pointer-events: auto !important;
+}
+
+
+/* ===== Large image viewer (CSS-only) ===== */
+
+/* (Optional) wrapper — if present */
+.sv-viewer-root {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Big square viewer */
+.sv-main {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 100%;
+  background: #000;
+  border-radius: .5rem;
+  padding: 2px;              /* add slight padding around image */
+  box-sizing: border-box;    /* keep overall size consistent */
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* keep arrows/counter inside */
+}
+
+/* On wider-than-mobile: cap the square by 70% of viewport height */
+@media (min-width: 576px) {
+
+  /* fallback */
+  .sv-main {
+    width: min(100%, 70vh);
+  }
+}
+
+@supports (height: 1svh) {
+  @media (min-width: 576px) {
+    .sv-main {
+      width: min(100%, 70svh);
+    }
+  }
+}
+
+@supports (height: 1dvh) {
+  @media (min-width: 576px) {
+    .sv-main {
+      width: min(100%, 70dvh);
+    }
+  }
+}
+
+/* Image always fully visible */
+.sv-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* never crop, letterbox on black */
+  display: block;
+}
+
+/* Controls (match your markup) */
+.sv-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, .45);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sv-prev {
+  left: 10px;
+}
+
+.sv-next {
+  right: 10px;
+}
+
+.sv-counter {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  padding: .15rem .4rem;
+  border-radius: .25rem;
+  font-size: .8rem;
+}
+
+/* Thumbnails (optional; unchanged) */
+.sv-thumbs {
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  padding: .25rem .25rem .5rem;
+}
+
+.sv-thumb-link {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 2px;
+  background: #fff;
+  flex: 0 0 auto;
+}
+
+.sv-thumb-link.active {
+  border-color: #0d6efd;
+}
+
+.sv-thumb-img {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* Make the selected filter button look active */
+.sv-filters .btn-check:checked+.btn {
+  color: #fff;
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+/* Apply SVG filters to the large image using :has() */
+.card:has(.sv-filters input[value="none"]:checked) .sv-main-img {
+  filter: none;
+}
+
+.card:has(.sv-filters input[value="redfree"]:checked) .sv-main-img {
+  filter: url(#pswp-greenmono);
+}
+
+.card:has(.sv-filters input[value="greenboost"]:checked) .sv-main-img {
+  filter: url(#pswp-greenboost);
+}
+
+.card:has(.sv-filters input[value="bluemono"]:checked) .sv-main-img {
+  filter: url(#pswp-bluemono);
+}
+
+.card:has(.sv-filters input[value="gray"]:checked) .sv-main-img {
+  filter: url(#pswp-gray);
+}
+
+.card:has(.sv-filters input[value="contrast"]:checked) .sv-main-img {
+  filter: url(#pswp-contrast);
+}
+
+
+/* Filename bar under the viewer */
+.sv-filebar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: .25rem 0 .5rem;
+  padding: .35rem .5rem;
+  background: var(--bs-light, #f8f9fa);
+  border-radius: .375rem;
+  min-height: 2rem;
+}
+
+.sv-filebar-label {
+  color: var(--bs-secondary-color, #6c757d);
+  font-size: .85rem;
+  flex: 0 0 auto;
+}
+
+.sv-filebar-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* enables ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .9rem;
+}
+
+/* Light theme: ensure filename text is dark and readable */
+[data-bs-theme="light"] .sv-filebar-name {
+  color: var(--bs-body-color, #212529);
+}
+
+
+/* Subtle top navigation for screening detail */
+.sv-topbar .btn {
+  padding: .15rem .5rem;
+  line-height: 1.2;
+}
+
+
+/* Screening detail: lighten filter buttons (R,G,B,Y,H) in Light mode */
+[data-bs-theme="light"] .sv-filters .btn.btn-outline-secondary {
+  color: var(--bs-dark);
+  border-color: var(--bs-dark);
+}
+[data-bs-theme="light"] .sv-filters .btn.btn-outline-secondary:hover,
+[data-bs-theme="light"] .sv-filters .btn.btn-outline-secondary:focus {
+  color: var(--bs-dark);
+  border-color: var(--bs-dark);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+
+
+/* Screening detail: lighten filter buttons (R,G,B,Y,H) in dark mode */
+[data-bs-theme="dark"] .sv-filters .btn.btn-outline-secondary {
+  color: var(--bs-light);
+  border-color: var(--bs-light);
+}
+[data-bs-theme="dark"] .sv-filters .btn.btn-outline-secondary:hover,
+[data-bs-theme="dark"] .sv-filters .btn.btn-outline-secondary:focus {
+  color: var(--bs-light);
+  border-color: var(--bs-light);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-subtle {
+  border-color: transparent;
+  color: var(--bs-secondary-color, #6c757d);
+  background: transparent;
+}
+
+.btn-subtle:hover,
+.btn-subtle:focus {
+  color: var(--bs-body-color, #212529);
+  border-color: var(--bs-border-color, #dee2e6);
+  background: var(--bs-light, #f8f9fa);
+}
+
+.btn-subtle:disabled {
+  opacity: .55;
+  border-color: transparent;
+  background: transparent;
+  cursor: not-allowed;
+}
+
+/* Thin separator */
+.vr {
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--bs-border-color, #dee2e6);
+  opacity: .6;
+}
+
+/* screenings list cards */
+/* tighter cards */
+/* Header meta row */
+.scr-meta code {
+  font-size: .85em;
+}
+
+/* Subtle badge for #716 etc. */
+.scr-badge {
+  background-color: var(--bs-light);
+  color: var(--bs-secondary-color);
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Keep cards compact */
+.scr-card .card-header {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.scr-card .card-body {
+  padding-top: .75rem;
+  padding-bottom: .5rem;
+}
+
+/* Allow truncation & compact lists */
+.scr-grid .scr-col {
+  min-width: 0;
+}
+
+.list-compact li {
+  margin-bottom: .25rem;
+}
+
+/* On large screens, let report/image lists expand; on small, keep them tidy */
+.scr-scroll {
+  max-height: 260px;
+  overflow: auto;
+}
+
+@media (min-width: 992px) {
+  .scr-scroll {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+
+
+
+
+/* Pager box that looks like a small button */
+/* Pager box to match .btn-sm */
+.page-box {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--bs-border-color);
+  border-radius: .25rem;
+  height: calc(1.5em + .5rem + 2px);
+  padding: 0;
+  background: transparent
+  
+}
+
+.page-box:focus-within {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .25)
+}
+
+.page-input {
+  width: 2.75rem;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  text-align: center;
+  padding: .25rem .4rem;
+  line-height: 1.5;
+  font-size: .875rem;
+  appearance: textfield;
+  -moz-appearance: textfield
+}
+
+.page-input::-webkit-outer-spin-button,
+.page-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0
+}
+
+.page-box .sep {
+  border-left: 1px solid var(--bs-border-color);
+  padding: .25rem .5rem;
+  color: var(--bs-secondary-color);
+  font-size: .875rem;
+  line-height: 1.5
+}
+
+.toolbar-status {
+  min-height: 1.25rem
+}
+
+/* keeps row height steady when no query */
+
+
+/* Make the badge subtle but visible */
+.scr-badge {
+  background: var(--bs-light);
+  color: var(--bs-secondary-color);
+  border: 1px solid var(--bs-border-color);
+}
+
+/* Dark mode: ensure readable badge for encounter number */
+[data-bs-theme="dark"] .scr-badge {
+  background-color: var(--bs-secondary-bg-subtle);
+  color: var(--bs-secondary-text-emphasis);
+  border-color: var(--bs-secondary-border-subtle);
+}
+
+/* Slight emphasis + hover lift for the CTA */
+.detail-btn {
+  letter-spacing: .01em;
+}
+
+.card:hover .detail-btn {
+  transform: translateY(-1px);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .08);
+}
+
+/* On small screens make the button full width for easier tapping */
+@media (max-width: 576px) {
+  .detail-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Glaucoma edit: make the verify toggle red when not verified */
+.form-switch .form-check-input.state-not-verified {
+  background-color: var(--bs-danger) !important;
+  border-color: var(--bs-danger) !important;
+}
+.form-switch .form-check-input.state-not-verified:not(:checked) {
+  /* white knob over red track when not verified */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23ffffff'/%3E%3C/svg%3E") !important;
+}
+.form-switch .form-check-input.state-not-verified:focus {
+  box-shadow: 0 0 0 .25rem rgba(var(--bs-danger-rgb), .25) !important;
+}
+
+/* Grading viewer: center the single image perfectly */
+.imggr-viewer-root .imggr-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;      /* ensure black background */
+  padding: 2px;          /* small padding around the image */
+  box-sizing: border-box;
+}
+.imggr-viewer-root .imggr-main-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  margin: auto;
+}
+
+/* Grading filters: button active state */
+.imggr-filters .btn-check:checked + .btn {
+  color: #fff;
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+/* Apply SVG filter selections to the grading viewer image */
+.card:has(.imggr-filters input[value="none"]:checked) .imggr-main-img { filter: none; }
+.card:has(.imggr-filters input[value="redfree"]:checked) .imggr-main-img { filter: url(#pswp-greenmono); }
+.card:has(.imggr-filters input[value="greenboost"]:checked) .imggr-main-img { filter: url(#pswp-greenboost); }
+.card:has(.imggr-filters input[value="bluemono"]:checked) .imggr-main-img { filter: url(#pswp-bluemono); }
+.card:has(.imggr-filters input[value="gray"]:checked) .imggr-main-img { filter: url(#pswp-gray); }
+.card:has(.imggr-filters input[value="contrast"]:checked) .imggr-main-img { filter: url(#pswp-contrast); }
+
+
+
+[data-bs-theme="dark"]  .btn-outline-secondary {
+  color: var(--bs-light);
+  border-color: var(--bs-light);
+
+}
+
+
+ /* Base styles for the range input to reset browser defaults */
+    .form-range {
+        /* Remove default appearance */
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        /* Set a fixed height for the track */
+        cursor: pointer;
+        background: transparent;
+        /* Makes the default track background transparent */
+    }
+
+    /* Common track styling for all browsers */
+    .form-range::-moz-range-track {
+        background-color: #0f3100; /* Example: changes track color */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+      .form-range::-webkit-slider-runnable-track {
+        background-color: #0f3100; /* Example: changes track color to blue */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+    /* Common thumb styling for all browsers */
+    .form-range::-webkit-slider-thumb,
+    .form-range::-moz-range-thumb {
+        -webkit-appearance: none;      /* Required for styling in WebKit */
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #ffffff; /* White thumb color */
+        border-radius: 50%;
+        border: 1px solid #999;  /* Vertically center the thumb on the track */
+        margin-top: -4px;
+    }
+
+    /* Focus styles for the slider (works on the overall input element) */
+    .form-range:focus {
+        /* This removes the default browser focus ring */
+        outline: none;
+    }
+
+    /* Custom focus outline for the slider thumb */
+    .form-range:focus::-webkit-slider-thumb {
+        outline: 2px solid #5d9cec;
+        /* A clear, vibrant blue outline */
+        outline-offset: 4px;
+        /* Adds space between the thumb and the outline */
+        box-shadow: 0 0 0 2px #ffffff;
+        /* Adds a white shadow for high contrast on dark backgrounds */
+    }
+
+    .form-range:focus::-moz-range-thumb {
+        outline: 2px solid #5d9cec;
+        outline-offset: 4px;
+        /* Firefox renders the outline in the shape of the thumb, so a box-shadow isn't needed. */
+    }
+
+    /* Dark mode adjustments (optional) */
+    /*
+If your page supports dark mode, this ensures the outline is always visible.
+You can use a more specific selector like html[data-theme='dark'] or a class on the body.
+*/
+    @media (prefers-color-scheme: dark) {
+        .form-range:focus::-webkit-slider-thumb {
+            outline: 2px solid #5d9cec;
+            outline-offset: 4px;
+            /* In dark mode, a white box-shadow provides high contrast */
+            box-shadow: 0 0 0 2px #ffffff;
+        }
+
+      .form-range::-moz-range-track {
+        background-color: #e7f0e4; /* Example: changes track color */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+      .form-range::-webkit-slider-runnable-track {
+        background-color: #e7f0e4; /* Example: changes track color to blue */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+    }
+
+[data-bs-theme=dark] {
+        .form-range:focus::-webkit-slider-thumb {
+            outline: 2px solid #5d9cec;
+            outline-offset: 4px;
+            /* In dark mode, a white box-shadow provides high contrast */
+            box-shadow: 0 0 0 2px #ffffff;
+        }
+
+      .form-range::-moz-range-track {
+        background-color: #e7f0e4; /* Example: changes track color */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+      .form-range::-webkit-slider-runnable-track {
+        background-color: #e7f0e4; /* Example: changes track color to blue */
+        border-radius: 4px;        /* Optional: adds rounded corners to the track */
+    }
+}

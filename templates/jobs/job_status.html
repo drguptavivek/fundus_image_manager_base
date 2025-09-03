@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Job Status{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Job <code>{{ job_id }}</code></h5>
+        <div class="d-flex gap-2">
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('jobs.list_recent_jobs') }}">All Jobs</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('uploads.upload_form') }}">Upload</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-sm-3">Status</dt>
+          <dd class="col-sm-9">
+            <span id="status" class="badge bg-secondary">queued</span>
+          </dd>
+          <dt class="col-sm-3">Created</dt>
+          <dd class="col-sm-9"><span id="created_at">-</span></dd>
+          <dt class="col-sm-3">Uploaded By</dt>
+          <dd class="col-sm-9"><span id="uploader_username">-</span></dd>
+          <dt class="col-sm-3">Uploader IP</dt>
+          <dd class="col-sm-9"><span id="uploader_ip">-</span></dd>
+          <dt class="col-sm-3">Errored Items</dt>
+          <dd class="col-sm-9"><span id="error_count">0</span></dd>
+        </dl>
+
+        <hr>
+
+        <h6 class="mb-2">Files</h6>
+        <ul id="items" class="list-group mb-3"></ul>
+
+        <h6 class="mb-2">Rejected (client-side checks)</h6>
+        <ul id="rejected" class="list-group"></ul>
+
+        <div class="d-flex gap-2 mt-3">
+          <button id="refreshBtn" class="btn btn-outline-primary">Refresh now</button>
+          <a class="btn btn-secondary" href="{{ url_for('uploads.upload_form') }}">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function badgeClassForState(state) {
+    switch ((state || '').toLowerCase()) {
+      case 'ok': return 'success';
+      case 'error': return 'danger';
+      case 'processing': return 'warning text-dark';
+      case 'queued': return 'secondary';
+      default: return 'secondary';
+    }
+  }
+
+  function badgeHtml(state) {
+    const c = badgeClassForState(state);
+    return `<span class="badge bg-${c}">${state || 'unknown'}</span>`;
+  }
+
+  async function poll() {
+    const jobId = "{{ job_id }}";
+    try {
+      const res = await fetch(`/jobs/${jobId}`, { cache: 'no-store' });
+      const data = await res.json();
+
+      const statusEl = document.getElementById('status');
+      const createdEl = document.getElementById('created_at');
+      const errorEl = document.getElementById('error_count');
+      const listEl = document.getElementById('items');
+      const rejEl = document.getElementById('rejected');
+      const upUserEl = document.getElementById('uploader_username');
+      const upIpEl = document.getElementById('uploader_ip');
+
+      // header status
+      statusEl.className = `badge bg-${badgeClassForState(data.status)}`;
+      statusEl.textContent = (data.status || 'unknown');
+
+      createdEl.textContent = data.created_at || '-';
+      const errorCount = (data.items || []).filter((it) => (it.state || '').toLowerCase() === 'error').length;
+      errorEl.textContent = String(errorCount);
+      upUserEl.textContent = data.uploader_username || '-';
+      upIpEl.textContent = data.uploader_ip || '-';
+
+      // files list
+      listEl.innerHTML = '';
+      (data.items || []).forEach((it) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        const rejected = (it.state || '').toLowerCase() === 'error';
+        li.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="me-3">
+              <div class="fw-semibold">${it.filename}</div>
+              ${it.detail ? `<div class="small ${rejected ? 'text-danger' : 'text-muted'}">${it.detail}</div>` : ''}
+            </div>
+            <div class="d-flex gap-2 align-items-center">${rejected ? `<span class="badge bg-danger">Rejected</span>` : ''}${badgeHtml(it.state)}</div>
+          </div>
+          <div class="small text-muted mt-1">
+            ${it.started_at ? `Started: ${it.started_at}` : ''} ${it.finished_at ? ` | Finished: ${it.finished_at}` : ''}
+          </div>
+        `;
+        listEl.appendChild(li);
+      });
+
+      // rejected (single summary)
+      rejEl.innerHTML = '';
+      if (data.rejected_summary) {
+        const li = document.createElement('li');
+        li.className = 'list-group-item list-group-item-danger';
+        li.textContent = data.rejected_summary;
+        rejEl.appendChild(li);
+      }
+
+      if (!data.status || !['done', 'error'].includes(data.status.toLowerCase())) {
+        window._jobPollTimer = setTimeout(poll, 1500);
+      }
+    } catch (e) {
+      // keep polling in case of transient errors
+      window._jobPollTimer = setTimeout(poll, 3000);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      if (window._jobPollTimer) clearTimeout(window._jobPollTimer);
+      poll();
+    });
+    poll();
+  });
+</script>
+{% endblock %}

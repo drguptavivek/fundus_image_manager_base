@@ -1,0 +1,802 @@
+{% extends "base.html" %}
+{% block title %}Style Guide{% endblock %}
+
+{% block content %}
+<div class="py-3">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 m-0">Style Guide</h1>
+    <div class="text-body-secondary small">Bootstrap 5 + app.css</div>
+  </div>
+
+  <!-- Colors -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Colors</h2>
+    <div class="row g-3 row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6">
+      {% set colors = [
+        ('Primary', 'var(--bs-primary)'),
+        ('Secondary', 'var(--bs-secondary)'),
+        ('Success', 'var(--bs-success)'),
+        ('Danger', 'var(--bs-danger)'),
+        ('Warning', 'var(--bs-warning)'),
+        ('Info', 'var(--bs-info)'),
+        ('Light', 'var(--bs-light)'),
+        ('Dark', 'var(--bs-dark)'),
+        ('Body', 'var(--bs-body-color)'),
+        ('Border', 'var(--bs-border-color)'),
+      ] %}
+      {% for label, var in colors %}
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="rounded mb-2" style="height:48px;background: {{ var }};"></div>
+            <div class="small text-body-secondary">{{ label }}</div>
+            <code class="small">{{ var }}</code>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  
+  <!-- Buttons -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Buttons</h2>
+    <div class="mb-2">
+      <button class="btn btn-primary me-2">Primary</button>
+      <button class="btn btn-secondary me-2">Secondary</button>
+      <button class="btn btn-success me-2">Success</button>
+      <button class="btn btn-danger me-2">Danger</button>
+      <button class="btn btn-warning me-2">Warning</button>
+      <button class="btn btn-info me-2">Info</button>
+      <button class="btn btn-light me-2">Light</button>
+      <button class="btn btn-dark me-2">Dark</button>
+      <button class="btn btn-link">Link</button>
+    </div>
+    <div class="mb-2">
+      <button class="btn btn-outline-primary me-2">Outline Primary</button>
+      <button class="btn btn-outline-secondary me-2">Outline Secondary</button>
+      <button class="btn btn-outline-success me-2">Outline Success</button>
+      <button class="btn btn-outline-danger me-2">Outline Danger</button>
+      <button class="btn btn-outline-warning me-2">Outline Warning</button>
+      <button class="btn btn-outline-info me-2">Outline Info</button>
+      <button class="btn btn-outline-dark">Outline Dark</button>
+    </div>
+    <div class="mb-2">
+      <button class="btn btn-primary btn-sm me-2">Small</button>
+      <button class="btn btn-primary me-2">Default</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+    </div>
+    <div>
+      <button class="btn btn-primary me-2" disabled>Disabled</button>
+      <a class="btn btn-primary disabled" role="button" aria-disabled="true">Disabled link</a>
+    </div>
+  </section>
+
+
+  <!-- Utilities -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Utilities</h2>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <span class="d-inline-block p-2 bg-primary text-white rounded">.bg-primary</span>
+      <span class="d-inline-block p-2 border rounded">.border</span>
+      <span class="d-inline-block p-2 shadow-sm rounded">.shadow-sm</span>
+      <span class="d-inline-block p-2 text-body-secondary">.text-body-secondary</span>
+    </div>
+  </section>
+
+
+
+  <!-- Typography -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Typography</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h1>H1 Heading</h1>
+        <h2>H2 Heading</h2>
+        <h3>H3 Heading</h3>
+        <h4>H4 Heading</h4>
+        <h5>H5 Heading</h5>
+        <h6>H6 Heading</h6>
+      </div>
+      <div class="col-md-6">
+        <p>Body text with <strong>strong</strong>, <em>emphasis</em>, <a href="#">links</a>, and
+          <code>inline code</code>.</p>
+        <p class="text-body-secondary">Muted secondary text for subtle emphasis.</p>
+        <p class="lead m-0">Lead paragraph to introduce sections.</p>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Forms -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Forms</h2>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label" for="sgText">Text input</label>
+        <input id="sgText" class="form-control" placeholder="Placeholder" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="sgEmail">Email</label>
+        <input id="sgEmail" type="email" class="form-control" placeholder="name@example.com" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="sgSelect">Select</label>
+        <select id="sgSelect" class="form-select">
+          <option>Choose...</option>
+          <option>One</option>
+          <option>Two</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="sgTextarea">Textarea</label>
+        <textarea id="sgTextarea" class="form-control" rows="2"></textarea>
+      </div>
+      <div class="col-12">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="sgCheck1">
+          <label class="form-check-label" for="sgCheck1">Checkbox</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="sgCheck2" checked>
+          <label class="form-check-label" for="sgCheck2">Checked</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sgRadios" id="sgRad1" checked>
+          <label class="form-check-label" for="sgRad1">Radio 1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sgRadios" id="sgRad2">
+          <label class="form-check-label" for="sgRad2">Radio 2</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="sgSwitch">
+          <label class="form-check-label" for="sgSwitch">Switch</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="sgInputGroup">Input group</label>
+        <div class="input-group">
+          <span class="input-group-text">@</span>
+          <input id="sgInputGroup" type="text" class="form-control" placeholder="username">
+          <button class="btn btn-outline-secondary" type="button">Go</button>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" type="button">Submit</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Not-verified Switch -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Verification Switch</h2>
+    <div class="form-check form-switch">
+      <input class="form-check-input state-not-verified" type="checkbox" role="switch" id="sgVeri">
+      <label class="form-check-label" for="sgVeri">Not verified</label>
+    </div>
+    <div class="small text-body-secondary">Apply <code>.state-not-verified</code> to the switch input for a red track.</div>
+  </section>
+
+
+
+  <!-- Cards & Badges -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Cards & Badges</h2>
+    <div class="row g-3 row-cols-1 row-cols-md-2">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <span>Card header</span>
+            <span class="badge text-bg-primary">New</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Action</a>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+          </ul>
+          <div class="card-footer text-body-secondary">Footer</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6>Badges</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge text-bg-primary">Primary</span>
+              <span class="badge text-bg-secondary">Secondary</span>
+              <span class="badge text-bg-success">Success</span>
+              <span class="badge text-bg-danger">Danger</span>
+              <span class="badge text-bg-warning">Warning</span>
+              <span class="badge text-bg-info">Info</span>
+              <span class="badge text-bg-light">Light</span>
+              <span class="badge text-bg-dark">Dark</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Pager Control -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Pager</h2>
+    <div class="card">
+      <div class="card-body d-flex align-items-center gap-2 flex-wrap">
+        <button class="btn btn-sm btn-outline-secondary" type="button">Prev</button>
+        <div class="page-box">
+          <input class="page-input" type="number" min="1" value="1" aria-label="Page">
+          <span class="sep">/ 24</span>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary" type="button">Next</button>
+        <span class="vr mx-2"></span>
+        <span class="toolbar-status small text-body-secondary">Showing 1–50 of 1,200</span>
+      </div>
+      <div class="card-footer small text-body-secondary"><code>.page-box</code>, <code>.page-input</code>, <code>.sep</code>, <code>.toolbar-status</code></div>
+    </div>
+  </section>
+
+
+  <!-- KPI Cards -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">KPI Cards</h2>
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+      <!-- Primary KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--primary h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">Screenings</div>
+            <div class="display-6 fw-bold">1,248</div>
+            <div class="small opacity-75">+8.5% vs last week</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--primary</code></div>
+        </div>
+      </div>
+
+      <!-- Success KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--success h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">Verified</div>
+            <div class="display-6 fw-bold">834</div>
+            <div class="small opacity-75">+2.1% today</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--success</code></div>
+        </div>
+      </div>
+
+      <!-- Info KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--info h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">In Queue</div>
+            <div class="display-6 fw-bold">57</div>
+            <div class="small opacity-75">ETA ~ 3m</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--info</code></div>
+        </div>
+      </div>
+
+      <!-- Warning KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--warning h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">Pending Review</div>
+            <div class="display-6 fw-bold">112</div>
+            <div class="small opacity-75">-1.2% vs yesterday</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--warning</code></div>
+        </div>
+      </div>
+
+      <!-- Danger KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--danger h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">Errors</div>
+            <div class="display-6 fw-bold">9</div>
+            <div class="small opacity-75">3 new in last hour</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--danger</code></div>
+        </div>
+      </div>
+
+      <!-- Secondary KPI -->
+      <div class="col">
+        <div class="card kpi-card kpi--secondary h-100">
+          <div class="card-body">
+            <div class="text-uppercase small fw-semibold opacity-75">Avg. Processing</div>
+            <div class="display-6 fw-bold">18s</div>
+            <div class="small opacity-75">p95: 42s</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.kpi-card.kpi--secondary</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Theme Wrappers (Section Themes) -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Theme Wrappers</h2>
+    <p class="small text-body-secondary mb-3">Apply a wrapper like <code>.theme-jobs</code> to tint all cards within that section.</p>
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+      <div class="col">
+        <div class="p-2 theme-jobs h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Jobs Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-jobs .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-admin h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Admin Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-admin .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-uploads h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Uploads Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-uploads .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-uploaded_results h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Uploaded Results Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-uploaded_results .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-screenings h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Screenings Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-screenings .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-grading h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Grading Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-grading .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-glaucoma h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Glaucoma Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-glaucoma .card</code></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="p-2 theme-audit h-100">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Audit Theme</div>
+              <div class="small opacity-75">Tinted via wrapper</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-audit .card</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Named Gradient Cards -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Named Gradient Cards</h2>
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+      <div class="col">
+        <div class="card card-sunrise h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Sunrise</div>
+            <div class="small opacity-75">Warm gradient</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-sunrise</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-sea h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Sea</div>
+            <div class="small opacity-75">Cool gradient</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-sea</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-forest h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Forest</div>
+            <div class="small opacity-75">Green gradient</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-forest</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-lava h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Lava</div>
+            <div class="small opacity-75">Hot gradient</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-lava</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-aurora h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Aurora</div>
+            <div class="small opacity-75">Purple/blue gradient</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-aurora</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-candy h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Candy</div>
+            <div class="small opacity-75">Playful pinks</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-candy</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-violet h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Violet</div>
+            <div class="small opacity-75">Indigo/pink</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-violet</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-rainbow h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Rainbow</div>
+            <div class="small opacity-75">Full spectrum</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-rainbow</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft Tinted Cards -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Soft Tinted Cards</h2>
+    <p class="small text-body-secondary mb-2">Subtle, solid tints via <code>.card-soft-*</code> classes.</p>
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+      {% for name in ['primary','secondary','success','danger','warning','info'] %}
+      <div class="col">
+        <div class="card card-soft-{{ name }} h-100">
+          <div class="card-body">
+            <div class="fw-semibold text-capitalize">{{ name }} soft</div>
+            <div class="small opacity-75">Tinted background, subtle border</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-soft-{{ name }}</code></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- High Contrast Wrapper -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">High Contrast</h2>
+    <p class="small text-body-secondary mb-2">Use <code>.theme-contrast</code> to neutralize gradients for data-heavy views.</p>
+    <div class="row g-3 row-cols-1 row-cols-md-2">
+      <div class="col">
+        <div class="card card-rainbow h-100">
+          <div class="card-body">
+            <div class="fw-semibold">Gradient card</div>
+            <div class="small opacity-75">Default colorful style</div>
+          </div>
+          <div class="card-footer small text-body-secondary"><code>.card-rainbow</code></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="theme-contrast p-2 h-100">
+          <div class="card card-rainbow h-100">
+            <div class="card-body">
+              <div class="fw-semibold">Neutralized</div>
+              <div class="small opacity-75">Contrast wrapper applied</div>
+            </div>
+            <div class="card-footer small text-body-secondary"><code>.theme-contrast .card-rainbow</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  
+  <!-- Tables & Pagination -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Tables & Pagination</h2>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td>
+          </tr>
+          <tr>
+            <td>2</td><td>Jacob</td><td>Thornton</td><td>@fat</td>
+          </tr>
+          <tr>
+            <td>3</td><td>Larry</td><td>Bird</td><td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav aria-label="Pagination example">
+      <ul class="pagination m-0">
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  
+  <!-- Rainbow Table (striped) -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Rainbow Table</h2>
+    <p class="small text-body-secondary mb-2">Applies colorful stripes to <code>.table.table-striped</code> (light theme).</p>
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Label</th>
+            <th>Value</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(1, 13) %}
+          <tr>
+            <td>{{ i }}</td>
+            <td>Row {{ i }}</td>
+            <td>{{ (i * 7) % 100 }}%</td>
+            <td>
+              <span class="badge text-bg-{{ ['primary','danger','warning','success','info','secondary'][(i-1) % 6] }}">{{ ['Primary','Danger','Warning','Success','Info','Secondary'][(i-1) % 6] }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="small text-body-secondary"><code>.table.table-striped</code> with custom 6-color stripe cycle.</div>
+  </section>
+
+
+
+
+  <!-- Progress Bars -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Progress</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="fw-semibold mb-2">Basic</div>
+        <div class="progress mb-2" style="height: 10px;">
+          <div class="progress-bar" style="width: 25%"></div>
+        </div>
+        <div class="progress mb-2">
+          <div class="progress-bar bg-success" style="width: 50%"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="fw-semibold mb-2">Striped & Animated</div>
+        <div class="progress mb-2">
+          <div class="progress-bar bg-primary progress-bar-striped" style="width: 60%"></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="small text-body-secondary mt-2">Striping colors adapt to each variant.</div>
+  </section>
+
+
+  <!-- Viewer (sv-*) Demo -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Square Viewer (sv-*)</h2>
+    <div class="card">
+      <div class="card-body">
+        <div class="sv-viewer-root">
+          <div class="sv-main position-relative">
+            <img class="sv-main-img" src="{{ url_for('static', filename='retina_svg_logo.svg') }}" alt="Demo image">
+            <button class="sv-nav sv-prev" type="button" aria-label="Previous">‹</button>
+            <button class="sv-nav sv-next" type="button" aria-label="Next">›</button>
+            <div class="sv-counter">1 / 4</div>
+          </div>
+        </div>
+        <div class="sv-filebar mt-2">
+          <div class="sv-filebar-label">File</div>
+          <div class="sv-filebar-name">example_image.png</div>
+        </div>
+        <div class="sv-filters mt-2">
+          <div class="btn-group" role="group" aria-label="Filters">
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFNone" value="none" checked>
+            <label class="btn btn-outline-secondary btn-sm" for="svFNone">None</label>
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFRedfree" value="redfree">
+            <label class="btn btn-outline-secondary btn-sm" for="svFRedfree">Red‑free</label>
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFGreen" value="greenboost">
+            <label class="btn btn-outline-secondary btn-sm" for="svFGreen">Green+</label>
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFBlue" value="bluemono">
+            <label class="btn btn-outline-secondary btn-sm" for="svFBlue">Blue mono</label>
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFGray" value="gray">
+            <label class="btn btn-outline-secondary btn-sm" for="svFGray">Grayscale</label>
+            <input type="radio" class="btn-check" name="svFilterDemo" id="svFContrast" value="contrast">
+            <label class="btn btn-outline-secondary btn-sm" for="svFContrast">Contrast</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer small text-body-secondary"><code>.sv-viewer-root .sv-main .sv-main-img</code> + <code>.sv-filters</code></div>
+    </div>
+  </section>
+
+  <!-- Grading Viewer (imggr-*) Demo -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Grading Viewer (imggr-*)</h2>
+    <div class="card">
+      <div class="card-body imggr-viewer-root">
+        <div class="imggr-main">
+          <img class="imggr-main-img" src="{{ url_for('static', filename='retina_svg_logo.svg') }}" alt="Demo image">
+        </div>
+        <div class="imggr-filters mt-2">
+          <div class="btn-group" role="group" aria-label="Filters">
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFNone" value="none" checked>
+            <label class="btn btn-outline-secondary btn-sm" for="igFNone">None</label>
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFRedfree" value="redfree">
+            <label class="btn btn-outline-secondary btn-sm" for="igFRedfree">Red‑free</label>
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFGreen" value="greenboost">
+            <label class="btn btn-outline-secondary btn-sm" for="igFGreen">Green+</label>
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFBlue" value="bluemono">
+            <label class="btn btn-outline-secondary btn-sm" for="igFBlue">Blue mono</label>
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFGray" value="gray">
+            <label class="btn btn-outline-secondary btn-sm" for="igFGray">Grayscale</label>
+            <input type="radio" class="btn-check" name="imggrFilterDemo" id="igFContrast" value="contrast">
+            <label class="btn btn-outline-secondary btn-sm" for="igFContrast">Contrast</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer small text-body-secondary"><code>.imggr-viewer-root .imggr-main .imggr-main-img</code> + <code>.imggr-filters</code></div>
+    </div>
+  </section>
+
+  <!-- PhotoSwipe-style Controls (standalone demo) -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Viewer Controls</h2>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <div class="me-2 small">Zoom</div>
+          <input class="pswp__zoom-slider" type="range" min="0" max="100" value="40" aria-label="Zoom slider">
+        </div>
+        <div class="small mb-2">Filter buttons</div>
+        <div>
+          <button type="button" class="pswp__button pswp__button--filter-redfree">Red‑free</button>
+          <button type="button" class="pswp__button pswp__button--filter-greenboost">Green+</button>
+          <button type="button" class="pswp__button pswp__button--filter-bluemono">Blue mono</button>
+          <button type="button" class="pswp__button pswp__button--filter-gray">Grayscale</button>
+          <button type="button" class="pswp__button pswp__button--filter-contrast">Contrast</button>
+          <button type="button" class="pswp__button pswp__button--filter-clear">Clear</button>
+        </div>
+      </div>
+      <div class="card-footer small text-body-secondary"><code>.pswp__zoom-slider</code> and <code>.pswp__button--filter-*</code></div>
+    </div>
+  </section>
+
+  <!-- Screenings List Snippet -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Screenings Card</h2>
+    <div class="card scr-card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="scr-meta small">
+          <span class="badge scr-badge me-2">#716</span>
+          <code>PID‑00123</code>
+        </div>
+        <a href="#" class="btn btn-sm btn-outline-primary detail-btn">Open</a>
+      </div>
+      <div class="card-body">
+        <div class="row scr-grid g-3">
+          <div class="col-md-6 scr-col">
+            <ul class="m-0 ps-3 list-compact">
+              <li>Left image: available</li>
+              <li>Right image: missing</li>
+              <li>Reports: 2</li>
+            </ul>
+          </div>
+          <div class="col-md-6 scr-col">
+            <div class="scr-scroll">
+              <ul class="m-0 ps-3 list-compact">
+                {% for i in range(1,9) %}
+                <li>Report {{ i }} — status: ok</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small text-body-secondary mt-2">Uses <code>.scr-card</code>, <code>.scr-badge</code>, <code>.scr-grid</code>, <code>.list-compact</code>, <code>.scr-scroll</code></div>
+  </section>
+
+
+  <!-- Alerts -->
+  <section class="mb-5">
+    <h2 class="h5 mb-3">Alerts</h2>
+    <div class="d-grid gap-2">
+      <div class="alert alert-primary m-0" role="alert">Primary alert</div>
+      <div class="alert alert-secondary m-0" role="alert">Secondary alert</div>
+      <div class="alert alert-success m-0" role="alert">Success alert</div>
+      <div class="alert alert-danger m-0" role="alert">Danger alert</div>
+      <div class="alert alert-warning m-0" role="alert">Warning alert</div>
+      <div class="alert alert-info m-0" role="alert">Info alert</div>
+      <div class="alert alert-light m-0" role="alert">Light alert</div>
+      <div class="alert alert-dark m-0" role="alert">Dark alert</div>
+    </div>
+  </section>
+
+
+    <div class="alert alert-info small" role="alert">
+    Tip: Use the theme toggle in the footer to review dark vs light.
+  </div>
+
+  <div class="mb-5"></div>
+</div>
+
+{% endblock %}
