@@ -1,5 +1,5 @@
 [project]
-name = "fundus-img-xtract"
+name = "fundus-img-manager-base"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
